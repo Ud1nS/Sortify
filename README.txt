@@ -2,8 +2,7 @@
 
 2. "model.pth" (yang berada di dalam file dan "Sortify_Deploy.rar") dan "Sortify_Model_Export.pth" merupakan file yang sama
 
-3. Video berjudul "Demo" hanya penggalan dari video Full-nya
+3. Path bisa disesuaikan dengan device agar proses deploy local host berjalan dengan lancar
 
-4. Path bisa disesuaikan dengan device agar proses deploy local host berjalan dengan lancar
 
 sekian terimakasih ^v^ !
