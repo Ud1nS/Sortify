@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sortify</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo-section">
+                <img src="{{ url_for('static', filename='images/image.png') }}" alt="Sortify Logo" class="logo">
+            </div>
+        </div>
+    </header>
+    
+
+    <main>
+        <section id="discover" class="discover">
+            <div class="container">
+                <h2 class="section-title">Discover Sortify</h2>
+                <img src="{{ url_for('static', filename='images/banner.png') }}" alt="Sorting bins banner" class="banner-image">
+                <h3 class="subtitle">Empowering Sustainability: Smarter Waste Sorting Through AI Innovation</h3>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About Sortify</h2>
+                <p class="about-text">
+                    At Sortify, we believe that smarter technology leads to a cleaner planet. Our AI-powered waste classification system is designed to simplify and revolutionize waste sorting, making recycling easier and more efficient for individuals and communities alike. By utilizing advanced machine learning algorithms, our system identifies and categorizes waste with precision, ensuring that recyclables are correctly sorted and waste is minimized. We’re committed to promoting sustainable living through innovation, helping you reduce your environmental footprint one item at a time. Join us in our mission to create a greener, smarter, and cleaner future for all.
+                </p>
+            </div>
+        </section>
+
+        <section id="scanner" class="scanner">
+            <div class="container">
+                <h1>Welcome to Sortify</h1>
+                <p>Upload an image of your trash to classify it into the right category.</p>
+                
+                <form action="/" method="POST" enctype="multipart/form-data" class="upload-form">
+                    <figure class="image-preview">
+                        <img id="chosen-image" alt="Preview of uploaded file">
+                        <figcaption id="file-name">No file chosen</figcaption>
+                    </figure>
+                    
+                    <input type="file" id="upload-button" name="imagefile" accept="image/*" required>
+                    <label for="upload-button" class="file-upload-label">
+                        <i class="fas fa-file-upload"></i> Choose File
+                    </label>
+                    
+                    <button type="submit" class="btn-primary">Upload and Classify</button>
+                </form>
+
+                <div class="results">
+                    <h2>Scan Results</h2>
+                    {% if prediction %}
+                    <p>Prediction: {{ prediction }} - Confidence Level : {{ Accuracy }} %</p>
+                    {% else %}
+                    <p>Results will appear here.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>© 2024 Sortify. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const uploadButton = document.getElementById('upload-button');
+        const chosenImage = document.getElementById('chosen-image');
+        const fileName = document.getElementById('file-name');
+
+        uploadButton.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (event) {
+                    chosenImage.src = event.target.result;
+                    chosenImage.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+                fileName.textContent = file.name;
+            }
+        });
+    </script>
+</body>
+</html>
